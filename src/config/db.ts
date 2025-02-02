@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
+import { User } from '../entities/User';
 
 dotenv.config();
 
@@ -11,12 +12,13 @@ const AppDataSource = new DataSource({
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
     synchronize: true,
-    logging: false,
+    logging: true,
     ssl: {
         rejectUnauthorized: false,
     },
-    entities: [__dirname + '/../entities/*.ts'],
-    migrations: [__dirname + '/../migrations/*.ts'],
+    entities: [__dirname + '/../entities/*.{ts,js}'],
+    // entities: [User],
+    migrations: [__dirname + '/../migrations/*.{ts,js}'],
 });
 
 
